@@ -27,4 +27,18 @@ public class DemoService {
     public void saveAll(ArrayList<DemoModel> models){
         demoRepository.saveAll(models);
     }
+
+    public boolean genericReturnMethodBoolean(boolean doCrash){
+        if(doCrash){
+            throw new RuntimeException("crash");
+        }
+        return true;
+    }
+
+    public String genericReturnMethodString(boolean doCrash){
+        if(doCrash){
+            throw new RuntimeException("crash");
+        }
+        return "true";
+    }
 }
