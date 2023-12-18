@@ -12,11 +12,7 @@ class TechLunchSpockApplicationTests extends Specification { // AJOUTER extend s
     DemoRepository demoRepository = Mock();
 
     @SpringBean
-    DemoService demoService = new DemoService(demoRepository);
-
-    def setup() {
-        // SI ON VEUT FAIRE DU SETUP PARTICULIER
-    }
+    DemoService demoService = new DemoService(demoRepository)
 
     def "Nom du test"() {
         setup: "Configuration avant le test"
@@ -28,25 +24,18 @@ class TechLunchSpockApplicationTests extends Specification { // AJOUTER extend s
         var returnValue = demoService.findAll()
 
         then: "Vérification post appel"
-        assert returnValue.size() == 0
+        returnValue.size() == 0
     }
 
-    def "Plusieurs valeurs de retour"() {
+    def "Une valeur de retour spécifique"() {
         setup: "Configuration avant le test"
-        1 * demoRepository.findAll() >> response // on utilise la variable déclarée dans la data table
+        1 * demoRepository.findAll() >> [new DemoModel(1, "Kirk")] // on utilise la variable déclarée dans la data table
 
         when: "L'appel à effectuer"
         var returnValue = demoService.findAll()
 
         then: "Vérification post appel"
-        assert returnValue.size() == response.size()
-
-        where: "data table"
-
-        // On ne peut pas créer une data table avec une seule colonne, donc on déclare une colonne anonyme
-        response                   | _
-        []                         | _
-        [new DemoModel(1, "name")] | _
+        returnValue[0].name == "Kirk"
     }
 
     def "Passer un paramètre spécifique à une fonction"(){
