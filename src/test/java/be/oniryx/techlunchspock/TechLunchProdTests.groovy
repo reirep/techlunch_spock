@@ -12,4 +12,12 @@ class TechLunchProdTests extends Specification{
     @SpringBean
     DemoService demoService = new DemoService(demoRepository)
 
+    def "Testing d'exception"(){
+        when: "Methode qui va crash"
+        demoService.genericReturnMethodBoolean(true)
+
+        then: "On a une runtime exception"
+        RuntimeException e = thrown(RuntimeException.class)
+        e.getMessage().contains("crash")
+    }
 }
