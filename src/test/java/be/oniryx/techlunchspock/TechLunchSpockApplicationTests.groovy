@@ -3,6 +3,7 @@ package be.oniryx.techlunchspock
 import be.oniryx.techlunchspock.models.DemoModel
 import be.oniryx.techlunchspock.repositories.DemoRepository
 import be.oniryx.techlunchspock.services.DemoService
+import be.oniryx.techlunchspock.services.QuickMathService
 import org.spockframework.spring.SpringBean
 import spock.lang.Specification
 
@@ -11,8 +12,10 @@ class TechLunchSpockApplicationTests extends Specification { // AJOUTER extend s
 
     DemoRepository demoRepository = Mock();
 
+    QuickMathService quickMathService = Mock()
+
     @SpringBean
-    DemoService demoService = new DemoService(demoRepository)
+    DemoService demoService = new DemoService(demoRepository, quickMathService)
 
     def "Nom du test"() {
         setup: "Configuration avant le test"

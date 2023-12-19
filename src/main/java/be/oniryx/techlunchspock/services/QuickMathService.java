@@ -3,7 +3,7 @@ package be.oniryx.techlunchspock.services;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuickMath {
+public class QuickMathService {
 
     private final String QUICK_MAF = "https://youtu.be/M3ujv8xdK2w?si=7OJgtcVGCT3T8iJo";
     public int veryComplexMethod(int one){

@@ -2,18 +2,28 @@ package be.oniryx.techlunchspock.services;
 
 import be.oniryx.techlunchspock.models.DemoModel;
 import be.oniryx.techlunchspock.repositories.DemoRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DemoService {
 
-    private final DemoRepository demoRepository;
+    @Setter
+    @Getter
+    private List<DemoModel> definitelyAPrivateList;
 
-    public DemoService(DemoRepository demoRepository) {
+    private final DemoRepository demoRepository;
+    private final QuickMathService quickMathService;
+
+    public DemoService(DemoRepository demoRepository, QuickMathService quickMathService) {
         this.demoRepository = demoRepository;
+        this.quickMathService = quickMathService;
+        this.definitelyAPrivateList = new ArrayList<>();
     }
 
     public List<DemoModel> findAll(){
@@ -40,5 +50,9 @@ public class DemoService {
             throw new RuntimeException("crash");
         }
         return "true";
+    }
+
+    public Optional<String> genericOptionalMethod(boolean isEmpty){
+        return isEmpty ? Optional.empty() : Optional.of("kirk");
     }
 }
