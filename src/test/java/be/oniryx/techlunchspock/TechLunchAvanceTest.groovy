@@ -7,11 +7,9 @@ import be.oniryx.techlunchspock.services.QuickMathService
 import org.spockframework.spring.SpringBean
 import spock.lang.Specification
 
-import javax.swing.text.html.Option
-
 class TechLunchAvanceTest extends Specification {
 
-    DemoRepository demoRepository = Mock();
+    DemoRepository demoRepository = Mock()
 
     QuickMathService quickMathService = Mock()
 
